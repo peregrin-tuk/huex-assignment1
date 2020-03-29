@@ -1,5 +1,8 @@
 module.exports = {
-  pwa: {
-    name: 'Hypermedia Whiteboard'
-  }
+  "pwa": {
+    "name": "Hypermedia Whiteboard"
+  },
+  "transpileDependencies": [
+    "vuetify"
+  ]
 }
