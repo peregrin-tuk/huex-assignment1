@@ -151,3 +151,9 @@
     }),
   })
 </script>
+
+<style lang="scss">
+  h1 {
+    color: styles.$color;
+  }
+</style>
