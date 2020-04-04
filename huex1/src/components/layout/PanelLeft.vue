@@ -1,11 +1,11 @@
 <template>
    <div class="panel-left">
-     <!-- The following UL is just a placeholder for a component -->
+     <!-- The following UL is just a placeholder for the file menu component -->
      <ul>
-          <li>First</li>
-          <li>Second</li>
-          <li>Third</li>
-        </ul>
+          <li> .</li>
+          <li> .</li>
+          <li> .</li>
+      </ul>
    </div>
 </template>
 
@@ -21,8 +21,8 @@
   .panel-left {
     position: absolute;
     right: 100%;
-    width: 200px;
+    width: styles.$layout-side-panel-width;
     text-align: right;
-    padding-right: 15px;
+    padding-right: 1rem;
   }
 </style>

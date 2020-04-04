@@ -30,5 +30,5 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-  @import "@/styles/app";
+  @import "@/styles/app"
 </style>
