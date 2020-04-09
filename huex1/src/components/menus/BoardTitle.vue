@@ -1,7 +1,7 @@
 <template>
-    <v-toolbar-title>
-      Board Title Placeholder
-    </v-toolbar-title>  
+  <v-toolbar-title>
+    {{ title }}
+  </v-toolbar-title>
 </template>
 
 <script lang="ts">
@@ -9,6 +9,16 @@
 
   export default Vue.extend({
     name: 'BoardTitle',
+    data: function () {
+      return {
+
+      }
+    },
+    computed: {
+      title () {
+        return this.$store.state.currentBoard.name
+      }
+    }
   })
 </script>
 

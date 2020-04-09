@@ -5,6 +5,7 @@
       <MainWrapper/>
       <FooterWrapper/>
     </v-content>
+    <Debug />
   </v-app>
 </template>
 
@@ -13,15 +14,11 @@ import Vue from 'vue';
 import HeaderWrapper from './components/layout/HeaderWrapper.vue';
 import MainWrapper from './components/layout/MainWrapper.vue';
 import FooterWrapper from './components/layout/FooterWrapper.vue';
-import { firestorePlugin } from "vuefire";
-import {db} from "@/database";
-
-Vue.use(firestorePlugin)
-
+import Debug from "@/components/Debug.vue";
 export default Vue.extend({
   name: 'App',
-
   components: {
+    Debug,
     HeaderWrapper,
     MainWrapper,
     FooterWrapper
@@ -32,17 +29,24 @@ export default Vue.extend({
   }),
 
   mounted(): void {
-    // Uncomment to see state change in real time when you make changes in firebase
-    /*
-    setInterval(() => {
-      console.table(this.boards)
-    }, 2000)
-     */
+    // Update hashbang when you load a new board
+    this.$store.watch(() => this.$store.getters.getBoardId, n => {
+      window.location.href = '#' + n
+    })
   },
 
-  firestore: {
-    boards: db.collection('boards').doc(location.hash.substr(1) || 'first-board' )
-  }
+  created() {
+    // Load board from hashbang
+    this.$store.dispatch('bindCurrentBoard', window.location.hash.substr(1) || 'first-board')
+    .then(() => {
+      // console.log(this.$store.state.currentBoard)
+      // const boardId = this.$store.state.currentBoard.id
+    })
+    .catch(() => {
+      console.warn('Could not set hash location because the board could not be retrieved.')
+    })
+  },
+
 });
 </script>
 
