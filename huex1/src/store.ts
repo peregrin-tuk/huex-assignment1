@@ -1,24 +1,24 @@
 import Vue from 'vue'
 import Vuex, {Store} from 'vuex'
 import {firestoreAction, vuexfireMutations} from 'vuexfire'
-import { db } from './database'
+import {db} from './database'
 
 Vue.use(Vuex)
+
+const defaultCurrentBoard = {
+  name: 'loading...',
+  key: '',
+  content: [],
+  id: ''
+}
 
 const store: Store<any> = new Vuex.Store({
   state: {
     localStoredBoards: [],
-    currentBoard: {
-      name: 'loading...',
-      key: '',
-      content: [],
-      id: ''
-    },
+    currentBoard: defaultCurrentBoard,
     activeTool: 'brush', // eg. 'brush' or 'form'
     toolProperties: {
-      select: {
-
-      },
+      select: {},
       pen: {
         color: '#000000',
         size: 12
@@ -41,9 +41,11 @@ const store: Store<any> = new Vuex.Store({
 
   getters: {
     getBoardName: state => {
+      if (!store.state.currentBoard) return
       return store.state.currentBoard.name
     },
     getBoardId: state => {
+      if (!store.state.currentBoard) return
       return store.state.currentBoard.id
     }
   },
@@ -52,22 +54,34 @@ const store: Store<any> = new Vuex.Store({
     setActiveTool(activeTool, tool) {
       activeTool = tool
     },
+    resetCurrentBoardToDefaults(state) {
+      console.log('resetting board')
+      state.currentBoard = defaultCurrentBoard
+      console.log('after resetting: ', state.currentBoard)
+    },
     ...vuexfireMutations
   },
 
   actions: {
-    bindCurrentBoard: firestoreAction(({ bindFirestoreRef }, payload) => {
-      // console.log('binding board:', payload)
-      // console.log(db.collection('boards').doc(payload))
+    bindCurrentBoard: firestoreAction(({bindFirestoreRef}, payload) => {
+      // db.collection('boards').doc(payload).get().then( (doc) => console.log(doc.data()))
       return bindFirestoreRef('currentBoard',
-        db.collection('boards').doc(payload), { reset: false })
-        .then(() => { console.log(`successfully bound board "${payload}" from database to the state.`)})
+        db.collection('boards').doc(payload), {reset: true})
+        .then((e) => new Promise((resolve, reject) => {
+          e ? resolve() : reject()
+        }).catch((e) => {
+          console.warn('Could not bind board because the board with the id ' + payload + ' could not be retrieved.')
+          //store.commit('resetCurrentBoardToDefaults')
+        }))
     }),
 
-    updateBoardName: firestoreAction(({ state }, payload) => {
-      db.collection('boards')
+    updateBoardName: firestoreAction(({state}, payload) => {
+      return db.collection('boards')
         .doc(location.hash.substr(1))
-        .update( { name: payload})
+        .update({name: payload})
+        .then(e => {
+          console.log('successfully updated board name to  ', payload)
+        })
         .catch(e => {
           console.error(e)
         })

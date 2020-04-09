@@ -5,49 +5,47 @@
       <MainWrapper/>
       <FooterWrapper/>
     </v-content>
-    <Debug />
+    <Debug/>
   </v-app>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import HeaderWrapper from './components/layout/HeaderWrapper.vue';
-import MainWrapper from './components/layout/MainWrapper.vue';
-import FooterWrapper from './components/layout/FooterWrapper.vue';
-import Debug from "@/components/Debug.vue";
-export default Vue.extend({
-  name: 'App',
-  components: {
-    Debug,
-    HeaderWrapper,
-    MainWrapper,
-    FooterWrapper
-  },
+  import Vue from 'vue';
+  import HeaderWrapper from './components/layout/HeaderWrapper.vue';
+  import MainWrapper from './components/layout/MainWrapper.vue';
+  import FooterWrapper from './components/layout/FooterWrapper.vue';
+  import Debug from "@/components/Debug.vue";
 
-  data: () => ({
-    boards: []
-  }),
+  export default Vue.extend({
+    name: 'App',
+    components: {
+      Debug,
+      HeaderWrapper,
+      MainWrapper,
+      FooterWrapper
+    },
 
-  mounted(): void {
-    // Update hashbang when you load a new board
-    this.$store.watch(() => this.$store.getters.getBoardId, n => {
-      window.location.href = '#' + n
-    })
-  },
+    data: () => ({}),
 
-  created() {
-    // Load board from hashbang
-    this.$store.dispatch('bindCurrentBoard', window.location.hash.substr(1) || 'first-board')
-    .then(() => {
-      // console.log(this.$store.state.currentBoard)
-      // const boardId = this.$store.state.currentBoard.id
-    })
-    .catch(() => {
-      console.warn('Could not set hash location because the board could not be retrieved.')
-    })
-  },
+    created() {
+      // Update hashbang when you load a new board
+      this.$store.watch(() => this.$store.getters.getBoardId, n => {
+        if(n === undefined || n === '') return;
+        window.location.href = '#' + n
+      })
 
-});
+      // Load board from hashbang or create new one if no hashbang is given
+      if (window.location.hash.substr(1)) {
+        this.$store.dispatch('bindCurrentBoard', window.location.hash.substr(1) || 'first-board')
+      } else {
+        console.info('No hashbang given, creating new board')
+        this.$store.dispatch('addNewBoard')
+      }
+
+
+    },
+
+  });
 </script>
 
 <style lang="scss">
