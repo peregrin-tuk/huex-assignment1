@@ -1,7 +1,7 @@
 <template>
-    <v-btn :icon="!selected" :fab="selected" :small="selected" color="white">
-      <v-icon :color="selected ? 'primary' : 'white'">{{ icon }}</v-icon>
-    </v-btn>
+  <v-btn :icon="!selected" :fab="selected" :small="selected" color="white">
+    <v-icon :color="selected ? 'primary' : 'white'">{{ icon }}</v-icon>
+  </v-btn>
 </template>
 
 <script lang="ts">
@@ -11,10 +11,13 @@ export default Vue.extend({
   name: "ToolButton", 
   props: {
     selected: Boolean,
-    icon: String,
+    icon: {
+      type: String,
+      required: true
+    }
   }
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 </style>

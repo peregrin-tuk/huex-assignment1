@@ -17,7 +17,7 @@
   })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .panel-left {
     position: absolute;
     right: 100%;

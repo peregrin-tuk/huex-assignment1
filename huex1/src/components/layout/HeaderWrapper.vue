@@ -19,7 +19,7 @@
   })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .header-wrapper {
         height: styles.$layout-header-bg-height;
         margin-bottom: - styles.$layout-header-bg-overlap;
