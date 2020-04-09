@@ -14,7 +14,7 @@
   })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .canvas-container {
       background-color: #eee;
       width: 100%;

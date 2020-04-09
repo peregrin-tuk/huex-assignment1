@@ -10,8 +10,6 @@
         max="20"
         v-model="size"
         :label="size"
-        @click:append="increase"
-        @click:prepend="decrease"
         dense
       ></v-slider>
     </v-card>
@@ -33,7 +31,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .slider-button-card {
   padding: 2px 10px;
 }

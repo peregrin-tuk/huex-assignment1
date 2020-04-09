@@ -19,7 +19,10 @@ import ToolButton from "./ToolButton.vue"
 export default Vue.extend({
   name: "ExpandibleToolButton",
   props: {
-    icon: String,
+    icon: {
+      type: String,
+      required: true
+    }
   },
   components: {
     ToolButton,
@@ -27,7 +30,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .expandible-button-wrapper {
   display: flex;
   align-items: center;

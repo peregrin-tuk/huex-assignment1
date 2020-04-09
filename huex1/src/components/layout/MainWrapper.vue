@@ -23,7 +23,7 @@
     })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .main-wrapper {
         position: relative;
         margin: 0 auto;
