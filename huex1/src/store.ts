@@ -61,7 +61,7 @@ const store: Store<any> = new Vuex.Store({
       // console.log(db.collection('boards').doc(payload))
       return bindFirestoreRef('currentBoard',
         db.collection('boards').doc(payload), { reset: false })
-        .then(() => { console.log('successfully bound board from database to the state.')})
+        .then(() => { console.log(`successfully bound board "${payload}" from database to the state.`)})
     }),
 
     updateBoardName: firestoreAction(({ state }, payload) => {
