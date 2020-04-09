@@ -10,8 +10,8 @@
     <v-spacer></v-spacer>
 
     <!-- todo replace with actual tool options set -->
-    <SliderButton></SliderButton>
     <ColorButton></ColorButton>
+    <SliderButton></SliderButton>
 
     <v-divider 
       vertical 
