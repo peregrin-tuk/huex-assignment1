@@ -5,45 +5,47 @@
       <MainWrapper/>
       <FooterWrapper/>
     </v-content>
+    <Debug/>
   </v-app>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import HeaderWrapper from './components/layout/HeaderWrapper.vue';
-import MainWrapper from './components/layout/MainWrapper.vue';
-import FooterWrapper from './components/layout/FooterWrapper.vue';
-import { firestorePlugin } from "vuefire";
-import {db} from "@/database";
+  import Vue from 'vue';
+  import HeaderWrapper from './components/layout/HeaderWrapper.vue';
+  import MainWrapper from './components/layout/MainWrapper.vue';
+  import FooterWrapper from './components/layout/FooterWrapper.vue';
+  import Debug from "@/components/Debug.vue";
 
-Vue.use(firestorePlugin)
+  export default Vue.extend({
+    name: 'App',
+    components: {
+      Debug,
+      HeaderWrapper,
+      MainWrapper,
+      FooterWrapper
+    },
 
-export default Vue.extend({
-  name: 'App',
+    data: () => ({}),
 
-  components: {
-    HeaderWrapper,
-    MainWrapper,
-    FooterWrapper
-  },
+    created() {
+      // Update hashbang when you load a new board
+      this.$store.watch(() => this.$store.getters.getBoardId, n => {
+        if(n === undefined || n === '') return;
+        window.location.href = '#' + n
+      })
 
-  data: () => ({
-    boards: []
-  }),
+      // Load board from hashbang or create new one if no hashbang is given
+      if (window.location.hash.substr(1)) {
+        this.$store.dispatch('bindCurrentBoard', window.location.hash.substr(1) || 'first-board')
+      } else {
+        console.info('No hashbang given, creating new board')
+        this.$store.dispatch('addNewBoard')
+      }
 
-  mounted(): void {
-    // Uncomment to see state change in real time when you make changes in firebase
-    /*
-    setInterval(() => {
-      console.table(this.boards)
-    }, 2000)
-     */
-  },
 
-  firestore: {
-    boards: db.collection('boards').doc(location.hash.substr(1) || 'first-board' )
-  }
-});
+    },
+
+  });
 </script>
 
 <style lang="scss">
