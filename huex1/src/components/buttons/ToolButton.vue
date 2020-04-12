@@ -1,6 +1,15 @@
 <template>
-  <v-btn :icon="!selected" :fab="selected" :small="selected" color="white">
-    <v-icon :color="selected ? 'primary' : 'white'">{{ icon }}</v-icon>
+  <v-btn 
+    :icon="!selected"
+    :fab="selected"
+    :small="selected"
+    color="white"
+  >
+    <v-icon
+      :color="selected ? 'primary' : 'white'"
+    >
+      {{ icon }}
+    </v-icon>
   </v-btn>
 </template>
 
