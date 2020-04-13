@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Vue from 'vue'
 import Vuex, {Store} from 'vuex'
 import {firestoreAction, vuexfireMutations} from 'vuexfire'
