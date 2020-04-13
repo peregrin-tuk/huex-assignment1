@@ -1,11 +1,16 @@
 <template>
   <v-text-field
+    class="board-title"
     :loading="loading"
     :value="title"
     color="success"
+    outlined
+    hide-details
+    dense
+    label="Edit Title"
     @change="changeBoardName"/>
 </template>
-
+ 
 <script lang="ts">
   import Vue from 'vue'
 
@@ -40,5 +45,16 @@
   })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+  .board-title.v-text-field--outlined:not(.v-input--is-focused):not(.v-input--has-state) > .v-input__control > .v-input__slot {
+    & fieldset, & div label {
+      color: var(--v-primary-base) !important;
+    }
+    &:hover fieldset, &:hover div label {
+      color: var(--v-primary-lighten1) !important;
+    }
+  }
+  .board-title.v-text-field--outlined {
+    font-size: 1.25rem;
+  }
 </style>
