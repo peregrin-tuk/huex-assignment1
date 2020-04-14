@@ -19,7 +19,6 @@
       class="mx-2"
     />
 
-    <!-- todo replace with actual tools -->
     <ToolButton icon="mdi-cursor-move" tool="select" />
     <ToolButton icon="mdi-brush" tool="brush" />
     <ToolButton icon="mdi-format-text" tool="text" />

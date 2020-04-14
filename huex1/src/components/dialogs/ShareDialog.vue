@@ -8,7 +8,9 @@
         outlined
         readonly
         hide-details
+        dense
         class="mt-6"
+        @click="selectAll"
       >
       <template v-slot:append-outer>
         <v-btn 
@@ -67,6 +69,9 @@ export default Vue.extend({
       document.execCommand('copy');
       this.copied = true;
       setTimeout(() => { this.copied = false; }, 5000);
+    },
+    selectAll: function(event: any) {
+      event.target.setSelectionRange(0, event.target.value.length)
     }
   }
 });
