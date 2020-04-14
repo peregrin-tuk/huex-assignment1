@@ -71,7 +71,12 @@ export default Vue.extend({
     setColor: function(value: string) {
       this.color = value;
     }
-  } 
+  },
+  watch: {
+    color: function(val) {
+      this.$store.commit('setActiveToolColor', val)
+    }
+  }
 });
 </script>
 

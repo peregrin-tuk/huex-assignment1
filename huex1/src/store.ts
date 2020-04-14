@@ -62,7 +62,7 @@ const store: Store<any> = new Vuex.Store({
     },
     setActiveToolSize(state, payload) {
       state.toolProperties[state.activeTool].size = payload
-      console.log(`commit: set ${state.activeTool} size to ${payload}`)
+      // console.log(`commit: set ${state.activeTool} size to ${payload}`)
     },
     ...vuexfireMutations
   },

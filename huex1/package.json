@@ -21,6 +21,7 @@
     "vuexfire": "^3.2.2"
   },
   "devDependencies": {
+    "@types/debounce": "^1.2.0",
     "@types/jest": "^24.0.19",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
