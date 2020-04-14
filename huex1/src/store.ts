@@ -13,6 +13,8 @@ const defaultCurrentBoard = {
   id: ''
 }
 
+const availableTools = ['select', 'brush', 'eraser', 'form', 'text']
+
 const store: Store<any> = new Vuex.Store({
   state: {
     localStoredBoards: [],
@@ -20,7 +22,7 @@ const store: Store<any> = new Vuex.Store({
     activeTool: 'brush', // eg. 'brush' or 'form'
     toolProperties: {
       select: {},
-      pen: {
+      brush: {
         color: '#000000',
         size: 12
       },
@@ -52,13 +54,12 @@ const store: Store<any> = new Vuex.Store({
   },
 
   mutations: {
-    setActiveTool(activeTool, tool) {
-      activeTool = tool
+    setActiveTool(state, tool) {
+      availableTools.find((e) => e === tool) ?
+      state.activeTool = tool : console.warn(`denied setting active tool to invalid value '${tool}', available values are${availableTools.map((tool) => ' ' + tool)} `)
     },
     resetCurrentBoardToDefaults(state) {
-      console.log('resetting board')
       state.currentBoard = defaultCurrentBoard
-      console.log('after resetting: ', state.currentBoard)
     },
     ...vuexfireMutations
   },

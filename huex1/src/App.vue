@@ -32,6 +32,7 @@
       this.$store.watch(() => this.$store.getters.getBoardId, n => {
         if(n === undefined || n === '') return;
         window.location.href = '#' + n
+        // console.log('watched:', n)
       })
 
       // Load board from hashbang or create new one if no hashbang is given
