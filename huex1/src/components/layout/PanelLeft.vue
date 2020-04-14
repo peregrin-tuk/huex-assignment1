@@ -1,9 +1,11 @@
 <template>
    <div class="panel-left">
-      <LabeledButton 
+      <LabeledButtonWithDialog
         label="NEW" 
         icon="mdi-plus-circle-outline"
-      ></LabeledButton>
+      >
+        <NewDialog />
+      </LabeledButtonWithDialog>
       <LabeledButtonWithDialog 
         label="OPEN" 
         icon="mdi-folder-open-outline"
@@ -21,16 +23,16 @@
 
 <script lang="ts">
   import Vue from 'vue'
-  import LabeledButton from '../buttons/LabeledButton.vue'
   import LabeledButtonWithDialog from '../buttons/LabeledButtonWithDialog.vue'
   import OpenDialog from "../dialogs/OpenDialog.vue"
   import ShareDialog from "../dialogs/ShareDialog.vue"
+  import NewDialog from "@/components/dialogs/NewDialog.vue";
 
   export default Vue.extend({
     name: 'PanelLeft',
     components: {
-      LabeledButton,
       LabeledButtonWithDialog,
+      NewDialog,
       OpenDialog,
       ShareDialog
     }

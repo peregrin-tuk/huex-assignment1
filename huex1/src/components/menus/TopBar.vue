@@ -1,8 +1,8 @@
 <template>
-  <v-toolbar 
-    color="primary" 
-    dense 
-    flat 
+  <v-toolbar
+    color="primary"
+    dense
+    flat
     dark
   >
     <UserBadge></UserBadge>
@@ -13,17 +13,17 @@
     <ColorButton></ColorButton>
     <SliderButton></SliderButton>
 
-    <v-divider 
-      vertical 
-      inset 
-      class="mx-2" 
+    <v-divider
+      vertical
+      inset
+      class="mx-2"
     />
 
-    <!-- todo replace with actual tools -->
-    <ToolButton icon="mdi-heart" />
-    <ToolButton icon="mdi-axe" />
-    <ToolButton icon="mdi-ice-cream" selected />
-    <ToolButton icon="mdi-bed" />
+    <ToolButton icon="mdi-cursor-move" tool="select" />
+    <ToolButton icon="mdi-brush" tool="brush" />
+    <ToolButton icon="mdi-format-text" tool="text" />
+    <ToolButton icon="mdi-vector-rectangle" tool="form" />
+    <ToolButton icon="mdi-eraser" tool="eraser" />
   </v-toolbar>
 </template>
 

@@ -1,3 +1,8 @@
 html {
   // font-size: 10px !important; // sets 1rem to 10px
 }
+
+// TODO: Put this in the appropriate place
+.v-application.v-application--is-ltr {
+  background-color: #f0f4f5 !important
+}

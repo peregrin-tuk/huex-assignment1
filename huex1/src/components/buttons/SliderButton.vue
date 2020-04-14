@@ -1,5 +1,5 @@
 <template>
-  <ExpandibleButton icon="mdi-circle-medium">
+  <ExpandibleButton icon="mdi-circle-medium" v-if="$store.getters.activeToolHasSize">
     <v-card 
       class="slider-button-card"
       width="200px"
@@ -8,9 +8,10 @@
       <v-slider
         min="1"
         max="20"
-        v-model="size"
-        :label="size"
+        :value="size"
+        :label="size.toString()"
         dense
+        @input="$store.commit('setActiveToolSize', $event)"
       ></v-slider>
     </v-card>
   </ExpandibleButton>
@@ -19,15 +20,18 @@
 <script lang="ts">
 import Vue from "vue";
 import ExpandibleButton from "./ExpandibleToolButton.vue";
+import {mapGetters} from "vuex";
 
 export default Vue.extend({
   name: "SliderButton",
   components: {
     ExpandibleButton
   },
-  data: () => ({
-    size: 10,
-  })
+  computed: {
+      ...mapGetters({
+        size: 'getActiveToolSize'
+      })
+  }
 });
 </script>
 

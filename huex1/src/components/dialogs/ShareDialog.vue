@@ -8,7 +8,9 @@
         outlined
         readonly
         hide-details
+        dense
         class="mt-6"
+        @click="selectAll"
       >
       <template v-slot:append-outer>
         <v-btn 
@@ -22,6 +24,7 @@
         </v-btn>
       </template>
       </v-text-field>
+      Just send someone this link and you can start collaborating in real-time! Doubles as a permanent link to the board for yourself.
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
@@ -67,6 +70,9 @@ export default Vue.extend({
       document.execCommand('copy');
       this.copied = true;
       setTimeout(() => { this.copied = false; }, 5000);
+    },
+    selectAll: function(event: any) {
+      event.target.setSelectionRange(0, event.target.value.length)
     }
   }
 });

@@ -4,6 +4,7 @@
     <br>
     <button @click="addBoard" value="add new board">new board</button>
     <h4 v-if="invalidBoard" @click="addBoard">The board you're requesting is invalid, generate new one?</h4>
+    <p @click="storeCurrentBoard">Board Speichern</p>
   </div>
 </template>
 
@@ -17,9 +18,12 @@
     },
     computed: {
       // TODO use this check in a modal that offers you to generate a new board or open another one
-      invalidBoard: function() {
+      invalidBoard() {
         const currentBoard = this.$store.state.currentBoard
         return currentBoard === undefined || currentBoard === null
+      },
+      activeTool: function() {
+        return this.$store.state.activeTool
       }
     },
     methods: {
@@ -29,6 +33,12 @@
       },
       addBoard: function() {
         this.$store.dispatch('addNewBoard')
+      },
+      changeActiveTool: function() {
+        this.$store.commit('setActiveTool', 'eraser')
+      },
+      storeCurrentBoard() {
+        this.$store.commit("addOrUpdateCurrentBoardToLocalBoards")
       }
     }
   }
