@@ -22,9 +22,9 @@
     <!-- todo replace with actual tools -->
     <ToolButton icon="mdi-cursor-move" tool="select" />
     <ToolButton icon="mdi-brush" tool="brush" />
-    <ToolButton icon="mdi-eraser" tool="eraser" />
-    <ToolButton icon="mdi-vector-rectangle" tool="form" />
     <ToolButton icon="mdi-format-text" tool="text" />
+    <ToolButton icon="mdi-vector-rectangle" tool="form" />
+    <ToolButton icon="mdi-eraser" tool="eraser" />
   </v-toolbar>
 </template>
 

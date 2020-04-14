@@ -1,5 +1,5 @@
 <template>
-  <ExpandibleButton icon="mdi-format-color-fill">
+  <ExpandibleButton icon="mdi-format-color-fill" v-if="$store.getters.activeToolHasColor">
     <v-btn-toggle 
       dense 
       mandatory 
@@ -64,6 +64,9 @@ export default Vue.extend({
       "amber": "FFCD36FF"
     }
   }),
+  computed: () => {
+
+  },
   methods: {
     setColor: function(value: string) {
       this.color = value;

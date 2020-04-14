@@ -31,7 +31,7 @@ const store: Store<any> = new Vuex.Store({
       },
       form: {
         strokeColor: '#000000',
-        fillColor: '#000000',
+        color: '#000000',
         formType: 'rectangle'
       },
       text: {
@@ -43,23 +43,26 @@ const store: Store<any> = new Vuex.Store({
   },
 
   getters: {
-    getBoardName: state => {
-      if (!store.state.currentBoard) return
-      return store.state.currentBoard.name
-    },
-    getBoardId: state => {
-      if (!store.state.currentBoard) return
-      return store.state.currentBoard.id
-    }
+    getBoardName: state => state.currentBoard ? state.currentBoard.name : null,
+    getBoardId: state => state.currentBoard ? state.currentBoard.id : null,
+    activeToolHasColor: state => state.toolProperties[state.activeTool].color !== undefined,
+    activeToolHasSize: state => state.toolProperties[state.activeTool].size !== undefined,
+    getActiveToolSize: state => state.toolProperties[state.activeTool].size
   },
 
   mutations: {
-    setActiveTool(state, tool) {
+    setActiveTool: (state, tool) => {
       availableTools.find((e) => e === tool) ?
       state.activeTool = tool : console.warn(`denied setting active tool to invalid value '${tool}', available values are${availableTools.map((tool) => ' ' + tool)} `)
     },
-    resetCurrentBoardToDefaults(state) {
-      state.currentBoard = defaultCurrentBoard
+    resetCurrentBoardToDefaults: state => state.currentBoard = defaultCurrentBoard,
+    setActiveToolColor(state, payload) {
+      state.toolProperties[state.activeTool].color = payload
+      console.log(`commit: set ${state.activeTool} color to ${payload}`)
+    },
+    setActiveToolSize(state, payload) {
+      state.toolProperties[state.activeTool].size = payload
+      console.log(`commit: set ${state.activeTool} size to ${payload}`)
     },
     ...vuexfireMutations
   },
