@@ -4,7 +4,7 @@
     <br>
     <button @click="addBoard" value="add new board">new board</button>
     <h4 v-if="invalidBoard" @click="addBoard">The board you're requesting is invalid, generate new one?</h4>
-    <p @click="changeActiveTool">activeTool: {{activeTool}}</p>
+    <p @click="storeCurrentBoard">Board Speichern</p>
   </div>
 </template>
 
@@ -36,6 +36,9 @@
       },
       changeActiveTool: function() {
         this.$store.commit('setActiveTool', 'eraser')
+      },
+      storeCurrentBoard() {
+        this.$store.commit("addOrUpdateCurrentBoardToLocalBoards")
       }
     }
   }

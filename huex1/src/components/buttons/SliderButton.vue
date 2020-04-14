@@ -9,7 +9,7 @@
         min="1"
         max="20"
         :value="size"
-        :label="size"
+        :label="size.toString()"
         dense
         @input="$store.commit('setActiveToolSize', $event)"
       ></v-slider>

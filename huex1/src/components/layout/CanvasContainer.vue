@@ -1,5 +1,5 @@
 <template>
-    <v-card class="canvas-container" elevation="10">
+    <v-card class="canvas-container" elevation="5">
       <v-responsive :aspect-ratio="16/9">
 
       </v-responsive>
@@ -16,7 +16,7 @@
 
 <style lang="scss" scoped>
     .canvas-container {
-      background-color: #eee;
+      background-color: #fff;
       width: 100%;
     }
 </style>

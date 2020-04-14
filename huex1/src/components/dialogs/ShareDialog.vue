@@ -24,6 +24,7 @@
         </v-btn>
       </template>
       </v-text-field>
+      Just send someone this link and you can start collaborating in real-time! Doubles as a permanent link to the board for yourself.
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>

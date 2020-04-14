@@ -4,7 +4,7 @@
     :icon="!selected"
     :small="selected"
     color="white"
-    @click="$store.commit('setActiveTool', tool)"
+    @click="tool ? $store.commit('setActiveTool', tool) : null"
   >
     <v-icon
       :color="selected ? 'primary' : 'white'"
@@ -20,10 +20,7 @@ import Vue from "vue";
 export default Vue.extend({
   name: "ToolButton",
   props: {
-    tool: {
-      type: String,
-      required: true
-    },
+    tool: String,
     icon: {
       type: String,
       required: true
