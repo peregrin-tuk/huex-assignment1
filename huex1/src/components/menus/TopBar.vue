@@ -9,7 +9,7 @@
     <BoardTitle color="white" />
     <v-spacer></v-spacer>
 
-    <!-- todo replace with actual tool options set -->
+    <!-- todo add form stroke color option -->
     <ColorButton></ColorButton>
     <SliderButton></SliderButton>
 
