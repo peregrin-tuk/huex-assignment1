@@ -8,7 +8,7 @@
   // TODO type the tools
   // @ts-ignore
   import tools from '@/tools/tool/tools'
-  import {DrawAction} from "@/tools/action";
+  // import {DrawAction} from "@/tools/action";
 
   export default Vue.extend( {
     name: "Canvas",
@@ -28,13 +28,8 @@
       // Redraw the canvas when the state changes (local / remote changes get synced to cloud and sent to client)
       // boardContent[0].args
       this.$store.watch(() => this.$store.getters.getBoardContent, boardContent => {
-        const drawActions: DrawAction[] = boardContent.map((content: any) => new DrawAction({
-          ...content._args
-          }))
-        // console.log(drawActions)
-        drawActions.forEach(action => {
-          action.exec()
-        })
+        paper.project.clear()
+        boardContent.forEach((jsonLayer: string) => paper.project.importJSON(jsonLayer))
       })
     },
     mounted() {

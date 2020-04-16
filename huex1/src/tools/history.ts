@@ -2,7 +2,7 @@
 // TODO incorporate history into vuex state?
 // eslint-disable-next-line no-unused-vars
 import {DrawAction} from "@/tools/action";
-import store from "@/store";
+// import store from "@/store";
 
 class History {
   history: DrawAction[] = [];
@@ -19,7 +19,6 @@ class History {
         }
         this.history.push(action);
         this.current = this.history.length;
-        store.dispatch('addElementToCurrentBoardContent', action)
         console.log('added step to history')
     }
     undo() {

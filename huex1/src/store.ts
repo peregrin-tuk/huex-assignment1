@@ -46,7 +46,7 @@ const store: Store<any> = new Vuex.Store({
   getters: {
     getBoardName: state => state.currentBoard ? state.currentBoard.name : null,
     getBoardId: state => state.currentBoard ? state.currentBoard.id : null,
-    getBoardContent: state => state.currentBoard ? state.currentBoard.content : null,
+    getBoardContent: state => state.currentBoard ? state.currentBoard.content : [],
     activeTool: state => state.activeTool,
     activeToolHasColor: state => state.toolProperties[state.activeTool].color !== undefined,
     activeToolHasSize: state => state.toolProperties[state.activeTool].size !== undefined,
@@ -115,10 +115,10 @@ const store: Store<any> = new Vuex.Store({
       return db.collection('boards')
         .doc(location.hash.substr(1))
         .update({
-          content: firebase.firestore.FieldValue.arrayUnion(Object.assign({}, payload))
+          content: firebase.firestore.FieldValue.arrayUnion(payload)
         })
         .then(e => {
-
+          console.log('added to content with payload', payload)
         })
         .catch(e => {
           console.error(e)
