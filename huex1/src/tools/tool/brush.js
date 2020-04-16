@@ -14,11 +14,8 @@ function onMouseDown() {
     let layer = createLayer();
     local.path = new paper.Path();
     let rgb = hexToRgba(toolProperties.color || '#000000ff');
-  console.log(rgb.a/255)
     local.path.fillColor = `rgba(${rgb.r},${rgb.g},${rgb.b},${rgb.a / 255})`;
-    console.log(local.path.fillColor)
     layer.addChild(local.path);
-    //console.log(layer)
 }
 
 function onMouseDrag(event) {
@@ -40,7 +37,7 @@ function onMouseUp() {
     local.path.simplify(1);
     const action = new DrawAction({
         layer: local.path.layer.name,
-        tool: store.getters.tool,
+        tool: store.getters.activeTool,
         points: local.path.segments.map(seg => {
             return {
                 x: seg._point._x,

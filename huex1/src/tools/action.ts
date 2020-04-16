@@ -13,9 +13,9 @@ export class DrawAction {
         this._args = args;
     }
     exec() {
+    console.log('executing draw action')
         if (!paper.project.layers[this._args.layer]) {
-            const layer = createLayer(this._args.layer);
-            console.log(layer)
+            createLayer(this._args.layer);
         }
         if (this._removed) {
             return paper.project.layers[this._args.layer].addChildren(this._removed)
