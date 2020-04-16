@@ -26,7 +26,7 @@
       })
 
       // Redraw the canvas when the state changes (local / remote changes get synced to cloud and sent to client)
-      // boardContent[0].args
+      // TODO prevent active stroke / drawing action from being removed (or not reapplied) when new data comes in
       this.$store.watch(() => this.$store.getters.getBoardContent, boardContent => {
         paper.project.clear()
         boardContent.forEach((jsonLayer: string) => paper.project.importJSON(jsonLayer))

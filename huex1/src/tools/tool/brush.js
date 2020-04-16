@@ -16,12 +16,10 @@ function onMouseDown() {
   let rgb = hexToRgba(toolProperties.color || '#000000ff');
   local.path.fillColor = `rgba(${rgb.r},${rgb.g},${rgb.b},${rgb.a / 255})`;
   layer.addChild(local.path);
-  // console.log('called onMouseDown')
 }
 
 function onMouseDrag(event) {
   if (!local.path) return;
-  console.log(event)
   var step = event.delta;
   step.x *= toolProperties.size / 10;
   step.y *= toolProperties.size / 10;
@@ -29,7 +27,6 @@ function onMouseDrag(event) {
 
   var top = event.middlePoint.add(step);
   var bottom = event.middlePoint.subtract(step);
-  // local.path.selected = true;
   local.path.add(top);
   local.path.insert(0, bottom);
 }
