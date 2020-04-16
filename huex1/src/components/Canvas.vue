@@ -12,7 +12,7 @@
   export default Vue.extend( {
     name: "Canvas",
     created() {
-      paper.install(window)
+      paper.install(window.document)
 
       // Handle selecting the right tool when the state changes
       this.$store.watch(() => this.$store.getters.activeTool, tool => {
