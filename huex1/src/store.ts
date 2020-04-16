@@ -45,6 +45,7 @@ const store: Store<any> = new Vuex.Store({
   getters: {
     getBoardName: state => state.currentBoard ? state.currentBoard.name : null,
     getBoardId: state => state.currentBoard ? state.currentBoard.id : null,
+    activeTool: state => state.activeTool,
     activeToolHasColor: state => state.toolProperties[state.activeTool].color !== undefined,
     activeToolHasSize: state => state.toolProperties[state.activeTool].size !== undefined,
     getActiveToolSize: state => state.toolProperties[state.activeTool].size
