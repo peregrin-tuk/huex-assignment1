@@ -2,7 +2,7 @@ import paper from 'paper';
 import store from '../../store';
 import { createLayer } from '../shared';
 import history from '../history';
-import { DrawAction } from '../action'
+import { DrawAction } from "../action";
 
 let local = {
     path: null,

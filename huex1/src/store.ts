@@ -23,19 +23,19 @@ const store: Store<any> = new Vuex.Store({
     toolProperties: {
       select: {},
       brush: {
-        color: '#000000',
+        color: '#000000FF',
         size: 12
       },
       eraser: {
         size: 12
       },
       form: {
-        strokeColor: '#000000',
-        color: '#000000',
+        strokeColor: '#000000FF',
+        color: '#000000FF',
         formType: 'rectangle'
       },
       text: {
-        color: '#000000',
+        color: '#000000FF',
         size: 12
       }
     },

@@ -2,7 +2,7 @@ import paper from 'paper';
 import store from '../../store';
 import { createLayer } from '../shared';
 import history from '../history';
-import { DrawAction } from '../action'
+import { DrawAction } from "../action";
 
 let local = {
     path: null
@@ -13,28 +13,31 @@ const toolProperties = store.state.toolProperties.brush
 function onMouseDown() {
     let layer = createLayer();
     local.path = new paper.Path();
-    let rgb = hexToRgb(toolProperties.color || '#000000');
-    local.path.fillColor = `rgba(${rgb.r},${rgb.g},${rgb.b},1.0)`;
+    let rgb = hexToRgba(toolProperties.color || '#000000ff');
+  console.log(rgb.a/255)
+    local.path.fillColor = `rgba(${rgb.r},${rgb.g},${rgb.b},${rgb.a / 255})`;
+    console.log(local.path.fillColor)
     layer.addChild(local.path);
+    //console.log(layer)
 }
 
 function onMouseDrag(event) {
     if (!local.path) return;
     var step = event.delta;
-    step.x *= toolProperties.size / 2.8;
-    step.y *= toolProperties.size / 2.8;
+    step.x *= toolProperties.size / 10;
+    step.y *= toolProperties.size / 10;
     step.angle += 90;
 
     var top = event.middlePoint.add(step);
     var bottom = event.middlePoint.subtract(step);
-    local.path.selected = true;
+    // local.path.selected = true;
     local.path.add(top);
     local.path.insert(0, bottom);
 }
 
 
 function onMouseUp() {
-    local.path.simplify();
+    local.path.simplify(1);
     const action = new DrawAction({
         layer: local.path.layer.name,
         tool: store.getters.tool,
@@ -57,11 +60,12 @@ tool.onMouseDown = onMouseDown;
 tool.onMouseDrag = onMouseDrag;
 tool.onMouseUp = onMouseUp;
 
-function hexToRgb(hex) {
-    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+function hexToRgba(hex) {
+    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
         r: parseInt(result[1], 16),
         g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16)
+        b: parseInt(result[3], 16),
+      a: parseInt(result[4], 16)
     } : null;
 }
