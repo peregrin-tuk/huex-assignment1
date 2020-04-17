@@ -27,7 +27,7 @@
     .main-wrapper {
         position: relative;
         margin: 0 auto;
-        max-width: calc(100vw - 2*#{$side-panel-width});
+        max-width: calc(100vw - 2*$side-panel-width);
         width: styles.$layout-content-width;
     }
 </style>

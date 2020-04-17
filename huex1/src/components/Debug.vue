@@ -5,6 +5,7 @@
     <button @click="addBoard" value="add new board">new board</button>
     <h4 v-if="invalidBoard" @click="addBoard">The board you're requesting is invalid, generate new one?</h4>
     <p @click="storeCurrentBoard">Board Speichern</p>
+    <p @click="undoHistory">Undo</p>
   </div>
 </template>
 
@@ -39,6 +40,9 @@
       },
       storeCurrentBoard() {
         this.$store.commit("addOrUpdateCurrentBoardToLocalBoards")
+      },
+      undoHistory() {
+        this.$store.dispatch('undoHistory')
       }
     }
   }

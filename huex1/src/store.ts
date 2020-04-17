@@ -47,6 +47,7 @@ const store: Store<any> = new Vuex.Store({
     getBoardName: state => state.currentBoard ? state.currentBoard.name : null,
     getBoardId: state => state.currentBoard ? state.currentBoard.id : null,
     getBoardContent: state => state.currentBoard ? state.currentBoard.content : [],
+    getNewestBoardContent: state => state.currentBoard ? state.currentBoard.content[state.currentBoard.content.length - 1] : [],
     activeTool: state => state.activeTool,
     activeToolHasColor: state => state.toolProperties[state.activeTool].color !== undefined,
     activeToolHasSize: state => state.toolProperties[state.activeTool].size !== undefined,
@@ -89,7 +90,7 @@ const store: Store<any> = new Vuex.Store({
 
     updateBoardName: firestoreAction((store, payload) => {
       return db.collection('boards')
-        .doc(location.hash.substr(1))
+        .doc(store.getters.getBoardId)
         .update({name: payload})
         .then(e => {
           store.commit('addOrUpdateCurrentBoardToLocalBoards')
@@ -113,17 +114,27 @@ const store: Store<any> = new Vuex.Store({
 
     addElementToCurrentBoardContent: firestoreAction((store, payload) => {
       return db.collection('boards')
-        .doc(location.hash.substr(1))
+        .doc(store.getters.getBoardId)
         .update({
           content: firebase.firestore.FieldValue.arrayUnion(payload)
-        })
-        .then(e => {
-          console.log('added to content with payload', payload)
         })
         .catch(e => {
           console.error(e)
         })
     }),
+
+    undoHistory: firestoreAction(store => {
+      const item = store.getters.getNewestBoardContent
+
+      return db.collection('boards')
+        .doc(store.getters.getBoardId)
+        .update({
+          content: firebase.firestore.FieldValue.arrayRemove(item)
+        })
+        .catch(e => {
+          console.error(e)
+        })
+    })
   }
 });
 

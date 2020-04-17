@@ -9,12 +9,14 @@ let local = {
     group: null
 }
 
+const toolProperties = store.state.toolProperties.eraser
+
 function onMouseDown(event) {
     let layer = createLayer();
 
     local.path = new paper.Path();
-    local.path.strokeColor = store.getters.eraserArgs.color;
-    local.path.strokeWidth = store.getters.eraserArgs.size;
+    local.path.strokeColor = '#ffffff';
+    local.path.strokeWidth = toolProperties.size;
 
     local.path.add(event.point);
 
@@ -25,8 +27,8 @@ function onMouseDown(event) {
     local.group.addChild(new paper.Shape.Ellipse({
         layer: layer,
         center: event.point,
-        fillColor: store.getters.eraserArgs.color,
-        radius: store.getters.eraserArgs.size / 2
+        fillColor: local.path.strokeColor,
+        radius: local.path.strokeWidth / 2
     }));
     layer.addChild(local.group);
 }
@@ -42,8 +44,8 @@ function onMouseUp(event) {
     const action = new DrawAction({
         layer: local.path.layer.name,
         tool: {
-            color: store.getters.tool.color,
-            size: store.getters.tool.size
+            color: local.path.strokeColor,
+            size: local.path.strokeWidth
         },
         points: local.path.segments.map(seg => {
             return {
@@ -52,6 +54,10 @@ function onMouseUp(event) {
             }
         })
     });
+
+  const json = local.path.layer.exportJSON()
+  store.dispatch('addElementToCurrentBoardContent', json)
+
     local.path = null;
     local.group = null;
     history.add(action);
