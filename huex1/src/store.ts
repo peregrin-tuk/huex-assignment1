@@ -125,6 +125,7 @@ const store: Store<any> = new Vuex.Store({
 
     undoHistory: firestoreAction(store => {
       const item = store.getters.getNewestBoardContent
+      if(!item) return
 
       return db.collection('boards')
         .doc(store.getters.getBoardId)

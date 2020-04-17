@@ -10,6 +10,13 @@
     <v-spacer></v-spacer>
 
     <!-- todo add form stroke color option -->
+    <v-btn
+      icon="mdi-undo"
+      color="white"
+      @click="this.$store.dispatch('undoHistory')"
+    >
+      <v-icon color="white">mdi-undo</v-icon>
+    </v-btn>
     <ColorButton></ColorButton>
     <SliderButton></SliderButton>
 
@@ -44,7 +51,7 @@ export default Vue.extend({
     ColorButton,
     UserBadge
   }
-});
+})
 </script>
 
 <style lang="scss" scoped>
