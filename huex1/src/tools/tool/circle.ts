@@ -1,17 +1,20 @@
 import paper from 'paper';
 import store from '../../store';
-import {createLayer} from '../shared';
-import history from '../history';
-import {DrawAction} from "../action";
+import {createLayer, hexToRgba} from '../shared';
 
-let local = {
+interface iCircle {
+  path: paper.Shape.Circle | null,
+  center: paper.Point | null
+}
+
+let local: iCircle = {
   path: null,
   center: null
 };
 
 const toolProperties = store.state.toolProperties.circle
 
-function onMouseDown(event) {
+function onMouseDown(event: paper.ToolEvent) {
 
   let layer = createLayer();
   const rgba = hexToRgba(toolProperties.color);
@@ -25,38 +28,23 @@ function onMouseDown(event) {
   local.center = event.point;
 }
 
-function onMouseDrag(event) {
-  if (!local.path) return;
+function onMouseDrag(event: paper.ToolEvent) {
+  if (!local.path || !local.center) return
+
   local.path.radius = Math.sqrt((event.point.x - local.center.x) * (event.point.x - local.center.x) + (event.point.y - local.center.y) * (event.point.y - local.center.y));
 }
 
 
 function onMouseUp() {
-  const action = new DrawAction({
-    layer: local.path.layer.name,
-    tool: store.getters.activeTool,
-    center: local.center,
-    radius: local.path.radius
-  });
+  if(!local.path) return
 
   const json = local.path.layer.exportJSON()
   store.dispatch('addElementToCurrentBoardContent', json)
 
   local.path = null;
-  history.add(action);
 }
 
 export const tool = new paper.Tool();
 tool.onMouseDown = onMouseDown;
 tool.onMouseDrag = onMouseDrag;
 tool.onMouseUp = onMouseUp;
-
-function hexToRgba(hex) {
-  let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? {
-    r: parseInt(result[1], 16),
-    g: parseInt(result[2], 16),
-    b: parseInt(result[3], 16),
-    a: parseInt(result[4], 16)
-  } : null;
-}
