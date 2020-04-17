@@ -14,7 +14,7 @@ const defaultCurrentBoard = {
   id: ''
 }
 
-const availableTools = ['select', 'brush', 'eraser', 'form', 'text']
+const availableTools = ['circle', 'brush', 'eraser', 'square', 'triangle']
 
 const store: Store<any> = new Vuex.Store({
   state: {
@@ -30,12 +30,15 @@ const store: Store<any> = new Vuex.Store({
       eraser: {
         size: 12
       },
-      form: {
-        strokeColor: '#000000FF',
+      square: {
         color: '#000000FF',
-        formType: 'rectangle'
+        size: 12
       },
-      text: {
+      triangle: {
+        color: '#000000FF',
+        size: 12
+      },
+      circle: {
         color: '#000000FF',
         size: 12
       }

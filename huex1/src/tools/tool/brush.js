@@ -13,20 +13,20 @@ const toolProperties = store.state.toolProperties.brush
 function onMouseDown() {
   let layer = createLayer();
   local.path = new paper.Path();
-  let rgb = hexToRgba(toolProperties.color || '#000000ff');
-  local.path.fillColor = `rgba(${rgb.r},${rgb.g},${rgb.b},${rgb.a / 255})`;
+  const rgba = hexToRgba(toolProperties.color || '#000000ff');
+  local.path.fillColor = `rgba(${rgba.r},${rgba.g},${rgba.b},${rgba.a / 255})`;
   layer.addChild(local.path);
 }
 
 function onMouseDrag(event) {
   if (!local.path) return;
-  var step = event.delta;
+  const step = event.delta;
   step.x *= toolProperties.size / 10;
   step.y *= toolProperties.size / 10;
   step.angle += 90;
 
-  var top = event.middlePoint.add(step);
-  var bottom = event.middlePoint.subtract(step);
+  const top = event.middlePoint.add(step);
+  const bottom = event.middlePoint.subtract(step);
   local.path.add(top);
   local.path.insert(0, bottom);
 }

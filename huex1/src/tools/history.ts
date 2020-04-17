@@ -19,7 +19,6 @@ class History {
         }
         this.history.push(action);
         this.current = this.history.length;
-        console.log('added step to history')
     }
     undo() {
         if (this.current > 0) {

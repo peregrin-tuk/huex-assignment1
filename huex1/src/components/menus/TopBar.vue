@@ -13,7 +13,7 @@
     <v-btn
       icon="mdi-undo"
       color="white"
-      @click="this.$store.dispatch('undoHistory')"
+      @click="$store.dispatch('undoHistory')"
     >
       <v-icon color="white">mdi-undo</v-icon>
     </v-btn>
@@ -26,10 +26,10 @@
       class="mx-2"
     />
 
-    <ToolButton icon="mdi-cursor-move" tool="select" />
     <ToolButton icon="mdi-brush" tool="brush" />
-    <ToolButton icon="mdi-format-text" tool="text" />
-    <ToolButton icon="mdi-vector-rectangle" tool="form" />
+    <ToolButton icon="mdi-vector-rectangle" tool="square" />
+    <ToolButton icon="mdi-vector-circle" tool="circle" />
+    <ToolButton icon="mdi-vector-triangle" tool="triangle" />
     <ToolButton icon="mdi-eraser" tool="eraser" />
   </v-toolbar>
 </template>
