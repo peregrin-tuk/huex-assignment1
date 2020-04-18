@@ -3,6 +3,7 @@ import Vue from 'vue'
 import Vuex, {Store} from 'vuex'
 import {firestoreAction, vuexfireMutations} from 'vuexfire'
 import {db} from './database'
+import firebase from "firebase";
 
 Vue.use(Vuex)
 
@@ -13,7 +14,7 @@ const defaultCurrentBoard = {
   id: ''
 }
 
-const availableTools = ['select', 'brush', 'eraser', 'form', 'text']
+const availableTools = ['circle', 'brush', 'eraser', 'square', 'triangle']
 
 const store: Store<any> = new Vuex.Store({
   state: {
@@ -23,19 +24,22 @@ const store: Store<any> = new Vuex.Store({
     toolProperties: {
       select: {},
       brush: {
-        color: '#000000',
+        color: '#000000FF',
         size: 12
       },
       eraser: {
         size: 12
       },
-      form: {
-        strokeColor: '#000000',
-        color: '#000000',
-        formType: 'rectangle'
+      square: {
+        color: '#000000FF',
+        size: 12
       },
-      text: {
-        color: '#000000',
+      triangle: {
+        color: '#000000FF',
+        size: 12
+      },
+      circle: {
+        color: '#000000FF',
         size: 12
       }
     },
@@ -45,6 +49,9 @@ const store: Store<any> = new Vuex.Store({
   getters: {
     getBoardName: state => state.currentBoard ? state.currentBoard.name : null,
     getBoardId: state => state.currentBoard ? state.currentBoard.id : null,
+    getBoardContent: state => state.currentBoard ? state.currentBoard.content : [],
+    getNewestBoardContent: state => state.currentBoard ? state.currentBoard.content[state.currentBoard.content.length - 1] : [],
+    activeTool: state => state.activeTool,
     activeToolHasColor: state => state.toolProperties[state.activeTool].color !== undefined,
     activeToolHasSize: state => state.toolProperties[state.activeTool].size !== undefined,
     getActiveToolSize: state => state.toolProperties[state.activeTool].size
@@ -53,7 +60,7 @@ const store: Store<any> = new Vuex.Store({
   mutations: {
     setActiveTool: (state, tool) => {
       availableTools.find((e) => e === tool) ?
-      state.activeTool = tool : console.warn(`denied setting active tool to invalid value '${tool}', available values are${availableTools.map((tool) => ' ' + tool)} `)
+        state.activeTool = tool : console.warn(`denied setting active tool to invalid value '${tool}', available values are${availableTools.map((tool) => ' ' + tool)} `)
     },
     resetCurrentBoardToDefaults: state => state.currentBoard = defaultCurrentBoard,
     setActiveToolColor(state, payload) {
@@ -69,12 +76,6 @@ const store: Store<any> = new Vuex.Store({
         name: state.currentBoard.name,
         timestamp: new Date()
       })
-      /*
-      state.localStoredBoards[state.currentBoard.id] = {
-        name: state.currentBoard.name,
-        timestamp: new Date()
-      }
-       */
     },
     ...vuexfireMutations
   },
@@ -92,7 +93,7 @@ const store: Store<any> = new Vuex.Store({
 
     updateBoardName: firestoreAction((store, payload) => {
       return db.collection('boards')
-        .doc(location.hash.substr(1))
+        .doc(store.getters.getBoardId)
         .update({name: payload})
         .then(e => {
           store.commit('addOrUpdateCurrentBoardToLocalBoards')
@@ -112,15 +113,32 @@ const store: Store<any> = new Vuex.Store({
         // db.collection('boards').doc(ref.id).get().then( (doc) => console.log(doc.data()))
         store.dispatch("bindCurrentBoard", ref.id)
       })
+    }),
+
+    addElementToCurrentBoardContent: firestoreAction((store, payload) => {
+      return db.collection('boards')
+        .doc(store.getters.getBoardId)
+        .update({
+          content: firebase.firestore.FieldValue.arrayUnion(payload)
+        })
+        .catch(e => {
+          console.error(e)
+        })
+    }),
+
+    undoHistory: firestoreAction(store => {
+      const item = store.getters.getNewestBoardContent
+      if(!item) return
+
+      return db.collection('boards')
+        .doc(store.getters.getBoardId)
+        .update({
+          content: firebase.firestore.FieldValue.arrayRemove(item)
+        })
+        .catch(e => {
+          console.error(e)
+        })
     })
-    /* This gets me a super strange type error I can't figure out
-    ,
-    addCurrentBoardToLocalBoards(state) {
-      state.commit('addCurrentBoardToLocalBoards', {
-        name: state.getters.getBoardName,
-        id: state.getters.getBoardId
-      })
-    }*/
   }
 });
 

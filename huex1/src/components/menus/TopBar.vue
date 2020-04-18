@@ -9,7 +9,14 @@
     <BoardTitle color="white" />
     <v-spacer></v-spacer>
 
-    <!-- todo replace with actual tool options set -->
+    <!-- todo add form stroke color option -->
+    <v-btn
+      icon="mdi-undo"
+      color="white"
+      @click="$store.dispatch('undoHistory')"
+    >
+      <v-icon color="white">mdi-undo</v-icon>
+    </v-btn>
     <ColorButton></ColorButton>
     <SliderButton></SliderButton>
 
@@ -19,10 +26,10 @@
       class="mx-2"
     />
 
-    <ToolButton icon="mdi-cursor-move" tool="select" />
     <ToolButton icon="mdi-brush" tool="brush" />
-    <ToolButton icon="mdi-format-text" tool="text" />
-    <ToolButton icon="mdi-vector-rectangle" tool="form" />
+    <ToolButton icon="mdi-vector-rectangle" tool="square" />
+    <ToolButton icon="mdi-vector-circle" tool="circle" />
+    <ToolButton icon="mdi-vector-triangle" tool="triangle" />
     <ToolButton icon="mdi-eraser" tool="eraser" />
   </v-toolbar>
 </template>
@@ -44,7 +51,7 @@ export default Vue.extend({
     ColorButton,
     UserBadge
   }
-});
+})
 </script>
 
 <style lang="scss" scoped>

@@ -33,7 +33,7 @@
             color="primary"
             large
             @click="loadBoard"
-            :disabled="selectedId === $store.getters.getBoardId"
+            :disabled="buttonClickable"
           >
             Load Board
           </v-btn>
@@ -59,11 +59,13 @@ export default Vue.extend({
   computed: {
     boards: function() {
       return this.$store.state.localStoredBoards
+    },
+    buttonClickable: function() {
+      return this.selectedId === this.$store.getters.getBoardId || !this.selectedId || !(this.selectedId.length > 0)
     }
   },
   methods: {
     selectBoard(event: any) {
-      console.log(this.boards[event])
       this.selectedId = event
     },
     loadBoard() {
