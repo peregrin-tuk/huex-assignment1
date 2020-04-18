@@ -1,6 +1,6 @@
 import paper from 'paper';
 import store from '../../store';
-import {createLayer, hexToRgba} from '../shared';
+import {createLayer, handleState, hexToRgba} from '../shared';
 
 interface iCircle {
   path: paper.Shape.Circle | null,
@@ -38,9 +38,7 @@ function onMouseDrag(event: paper.ToolEvent) {
 function onMouseUp() {
   if(!local.path) return
 
-  const json = local.path.layer.exportJSON()
-  store.dispatch('addElementToCurrentBoardContent', json)
-
+  handleState(local.path.layer.exportJSON())
   local.path = null;
 }
 

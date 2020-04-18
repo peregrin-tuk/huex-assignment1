@@ -1,14 +1,11 @@
 <template>
-  <canvas id="canvas" resize></canvas>
+  <canvas resize id="canvas"></canvas>
 </template>
 
 <script lang="ts">
   import paper from 'paper'
   import Vue from 'vue';
-  // TODO type the tools
-  // @ts-ignore
   import tools from '@/tools/tool/tools'
-  // import {DrawAction} from "@/tools/action";
 
   export default Vue.extend( {
     name: "Canvas",
@@ -18,7 +15,6 @@
       // Handle selecting the right tool when the state changes
       this.$store.watch(() => this.$store.getters.activeTool, tool => {
         if(tools[tool]) {
-          console.log('found tool', tool, 'activating...')
           tools[tool].activate()
         } else {
           console.warn('could not find tool', tool, 'in currently registered tools.')

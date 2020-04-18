@@ -5,7 +5,6 @@
       <MainWrapper/>
       <FooterWrapper/>
     </v-content>
-    <Debug/>
   </v-app>
 </template>
 
@@ -14,12 +13,10 @@
   import HeaderWrapper from './components/layout/HeaderWrapper.vue';
   import MainWrapper from './components/layout/MainWrapper.vue';
   import FooterWrapper from './components/layout/FooterWrapper.vue';
-  import Debug from "@/components/Debug.vue";
 
   export default Vue.extend({
     name: 'App',
     components: {
-      Debug,
       HeaderWrapper,
       MainWrapper,
       FooterWrapper
@@ -34,6 +31,17 @@
         window.location.href = '#' + n
       })
 
+      // Update stored board name when it's changed externally
+      this.$store.watch(() => this.$store.getters.getBoardName, (n) => {
+        if(!n) return
+        this.$store.commit('addOrUpdateCurrentBoardToLocalBoards')
+      })
+
+      // Add board to local boards when making a contribution
+      this.$store.watch(() => this.$store.getters.isCurrentBoardContributor, n => {
+        n ? this.$store.commit('addOrUpdateCurrentBoardToLocalBoards') : null
+      })
+
       // Load board from hashbang or create new one if no hashbang is given
       if (window.location.hash.substr(1)) {
         this.$store.dispatch('bindCurrentBoard', window.location.hash.substr(1) || 'first-board')
@@ -42,6 +50,8 @@
         this.$store.dispatch('addNewBoard')
       }
 
+      // Load local boards from storage
+      this.$store.commit('loadLocalBoardsFromStorage', [])
 
     },
 
@@ -49,5 +59,5 @@
 </script>
 
 <style lang="scss">
-  @import "@/styles/app"
+  @import "@/styles/app";
 </style>

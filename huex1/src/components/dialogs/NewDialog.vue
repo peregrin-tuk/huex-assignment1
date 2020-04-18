@@ -22,8 +22,9 @@ export default Vue.extend({
   }),
   methods: {
     addBoard: function() {
-      this.$store.dispatch('addNewBoard')
-      // TODO close dialog
+      this.$store.dispatch('addNewBoard');
+      // TODO apply proper closing solution
+      (this.$parent.$parent.$parent as any).closeDialog()
     }
   }
 });

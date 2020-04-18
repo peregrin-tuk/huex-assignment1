@@ -12,8 +12,11 @@
           :value="id"
         >
           <v-list-item-content>
-            <v-list-item-title>{{ value.name }} <small>#{{ id }}</small></v-list-item-title>
+            <v-list-item-title>{{ value.name }} <small class="font-weight-regular text--lighten-3">#{{ id }}</small></v-list-item-title>
           </v-list-item-content>
+          <v-list-item-icon @click.stop="deleteBoard(id)">
+            <v-icon>mdi-delete</v-icon>
+          </v-list-item-icon>
         </v-list-item>
       </v-list-item-group>
     </v-list>
@@ -42,6 +45,7 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
+      <!-- TODO apply proper closing solution -->
       <v-btn color="accent" text @click="$parent.$parent.$parent.closeDialog()">Cancel</v-btn>
     </v-card-actions>
   </v-card>
@@ -70,6 +74,9 @@ export default Vue.extend({
     },
     loadBoard() {
       this.$store.dispatch('bindCurrentBoard', this.selectedId)
+    },
+    deleteBoard(id: string) {
+      this.$store.commit('deleteBoardFromLocalBoards', id)
     }
   }
 });

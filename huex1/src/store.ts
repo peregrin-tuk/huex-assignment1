@@ -4,6 +4,7 @@ import Vuex, {Store} from 'vuex'
 import {firestoreAction, vuexfireMutations} from 'vuexfire'
 import {db} from './database'
 import firebase from "firebase";
+import localForage from 'localforage'
 
 Vue.use(Vuex)
 
@@ -19,10 +20,10 @@ const availableTools = ['circle', 'brush', 'eraser', 'square', 'triangle']
 const store: Store<any> = new Vuex.Store({
   state: {
     localStoredBoards: {},
-    currentBoard: defaultCurrentBoard,
-    activeTool: 'brush', // eg. 'brush' or 'form'
+    currentBoard: {},
+    currentBoardContributor: false,
+    activeTool: 'brush',
     toolProperties: {
-      select: {},
       brush: {
         color: '#000000FF',
         size: 12
@@ -51,6 +52,7 @@ const store: Store<any> = new Vuex.Store({
     getBoardId: state => state.currentBoard ? state.currentBoard.id : null,
     getBoardContent: state => state.currentBoard ? state.currentBoard.content : [],
     getNewestBoardContent: state => state.currentBoard ? state.currentBoard.content[state.currentBoard.content.length - 1] : [],
+    isCurrentBoardContributor: state => state.currentBoardContributor,
     activeTool: state => state.activeTool,
     activeToolHasColor: state => state.toolProperties[state.activeTool].color !== undefined,
     activeToolHasSize: state => state.toolProperties[state.activeTool].size !== undefined,
@@ -62,20 +64,39 @@ const store: Store<any> = new Vuex.Store({
       availableTools.find((e) => e === tool) ?
         state.activeTool = tool : console.warn(`denied setting active tool to invalid value '${tool}', available values are${availableTools.map((tool) => ' ' + tool)} `)
     },
+    setCurrentBoardContributor: (state, payload) => {
+      state.currentBoardContributor = payload
+    },
     resetCurrentBoardToDefaults: state => state.currentBoard = defaultCurrentBoard,
     setActiveToolColor(state, payload) {
       state.toolProperties[state.activeTool].color = payload
-      // console.log(`commit: set ${state.activeTool} color to ${payload}`)
     },
     setActiveToolSize(state, payload) {
       state.toolProperties[state.activeTool].size = payload
-      // console.log(`commit: set ${state.activeTool} size to ${payload}`)
     },
     addOrUpdateCurrentBoardToLocalBoards(state) {
       Vue.set(state.localStoredBoards, state.currentBoard.id, {
         name: state.currentBoard.name,
         timestamp: new Date()
       })
+
+      saveStateLocalBoardsToLocalStorage(state.localStoredBoards)
+
+    },
+    deleteBoardFromLocalBoards(state, payload) {
+      if(!state.localStoredBoards[payload])
+        return console.warn('tried to delete non-existent board', payload, 'from locally stored boards')
+
+      Vue.delete(state.localStoredBoards, payload)
+      saveStateLocalBoardsToLocalStorage(state.localStoredBoards)
+    },
+
+    loadLocalBoardsFromStorage(state) {
+      localForage.getItem('boards').then(val => {
+        if(!val) return
+        state.localStoredBoards = val
+      })
+        .catch(e => console.error(e))
     },
     ...vuexfireMutations
   },
@@ -103,7 +124,7 @@ const store: Store<any> = new Vuex.Store({
         })
     }),
 
-    addNewBoard: firestoreAction(({bindFirestoreRef}) => {
+    addNewBoard: firestoreAction((context) => {
       const ref = db.collection('boards').doc()
       return ref.set({
         name: 'New board',
@@ -111,7 +132,7 @@ const store: Store<any> = new Vuex.Store({
         key: 'placeholder'
       }).then(e => {
         // db.collection('boards').doc(ref.id).get().then( (doc) => console.log(doc.data()))
-        store.dispatch("bindCurrentBoard", ref.id)
+        context.dispatch("bindCurrentBoard", ref.id)
       })
     }),
 
@@ -128,7 +149,7 @@ const store: Store<any> = new Vuex.Store({
 
     undoHistory: firestoreAction(store => {
       const item = store.getters.getNewestBoardContent
-      if(!item) return
+      if (!item) return
 
       return db.collection('boards')
         .doc(store.getters.getBoardId)
@@ -141,5 +162,10 @@ const store: Store<any> = new Vuex.Store({
     })
   }
 });
+
+function saveStateLocalBoardsToLocalStorage(localStoredBoards: {}) {
+  localForage.setItem('boards', localStoredBoards)
+    .catch(e => console.error(e))
+}
 
 export default store

@@ -1,6 +1,7 @@
 // @ts-ignore
 import uuid4 from 'uuid4';
 import paper from 'paper';
+import store from "@/store";
 
 export const createLayer = (id?: any) => {
     if (!id) id = uuid4();
@@ -19,4 +20,9 @@ export const hexToRgba = (hex: string) => {
     b: parseInt(result[3], 16),
     a: parseInt(result[4], 16)
   } : {r: 0, g: 0, b: 0, a: 0};
+}
+
+export const handleState = (json: string) => {
+  store.dispatch('addElementToCurrentBoardContent', json)
+  store.commit('setCurrentBoardContributor', true)
 }
