@@ -6,7 +6,7 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn color="accent" text @click="dialog = false">Cancel</v-btn>
+      <v-btn color="accent" text @click="$parent.$parent.$parent.closeDialog()">Cancel</v-btn>
       <v-btn color="primary" @click="addBoard">Create new board</v-btn>
     </v-card-actions>
   </v-card> 
