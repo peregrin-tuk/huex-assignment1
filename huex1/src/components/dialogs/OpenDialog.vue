@@ -42,7 +42,7 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn color="accent" text @click="$emit('dialog', false)">Cancel</v-btn>
+      <v-btn color="accent" text @click="$parent.$parent.$parent.closeDialog()">Cancel</v-btn>
     </v-card-actions>
   </v-card>
 </template>

@@ -64,9 +64,6 @@ export default Vue.extend({
       "amber": "FFCD36FF"
     }
   }),
-  computed: () => {
-
-  },
   methods: {
     setColor: function(value: string) {
       this.color = value;

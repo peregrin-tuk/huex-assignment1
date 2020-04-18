@@ -11,7 +11,7 @@
 
     <!-- todo add form stroke color option -->
     <v-btn
-      icon="mdi-undo"
+      icon
       color="white"
       @click="$store.dispatch('undoHistory')"
     >
