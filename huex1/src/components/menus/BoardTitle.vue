@@ -10,7 +10,7 @@
     label="Edit Title"
     @change="changeBoardName"/>
 </template>
- 
+
 <script lang="ts">
   import Vue from 'vue'
 
@@ -27,7 +27,7 @@
     },
     computed: {
       title() {
-        if(!this.$store.state.currentBoard) return
+        if(!this.$store.state.currentBoard || !this.$store.state.currentBoard.id) return 'loading...'
         return this.$store.state.currentBoard.name
       }
     },

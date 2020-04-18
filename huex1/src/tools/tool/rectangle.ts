@@ -1,6 +1,6 @@
 import paper from 'paper';
 import store from '../../store';
-import {createLayer, hexToRgba} from '../shared';
+import {createLayer, handleState, hexToRgba} from '../shared';
 
 interface iRectangle {
   path: paper.Shape.Rectangle | null,
@@ -37,9 +37,7 @@ function onMouseUp() {
   if(!local.layer || !local.path) return
   local.layer.addChild(local.path);
 
-  const json = local.path.layer.exportJSON()
-  store.dispatch('addElementToCurrentBoardContent', json)
-
+  handleState(local.path.layer.exportJSON())
   local.path = null;
 }
 

@@ -4,10 +4,12 @@ import { tool as square } from './rectangle';
 import { tool as triangle } from './triangle';
 import { tool as circle } from './circle';
 
-export default {
+const toolList: { [key: string]: any } = {
   brush,
   eraser,
   square,
   circle,
-  triangle
+  triangle,
 }
+
+export default toolList

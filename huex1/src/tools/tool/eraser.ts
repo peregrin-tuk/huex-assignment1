@@ -1,6 +1,6 @@
 import paper from 'paper';
 import store from '../../store';
-import {createLayer} from '../shared';
+import {createLayer, handleState} from '../shared';
 
 interface iEraser {
   path: paper.Path | null,
@@ -47,9 +47,7 @@ function onMouseUp(event: paper.ToolEvent) {
   local.path.add(event.point);
   local.path.simplify();
 
-  const json = local.path.layer.exportJSON()
-  store.dispatch('addElementToCurrentBoardContent', json)
-
+  handleState(local.path.layer.exportJSON())
   local.path = null;
   local.group = null;
 }

@@ -1,6 +1,6 @@
 import paper from 'paper';
 import store from '../../store';
-import {createLayer, hexToRgba} from '../shared';
+import {createLayer, hexToRgba, handleState} from '../shared';
 
 interface iBrush {
   path: paper.Path | null
@@ -40,9 +40,7 @@ function onMouseUp() {
   local.path.simplify(1);
   local.path.selected = false;
 
-  const json = local.path.layer.exportJSON()
-  store.dispatch('addElementToCurrentBoardContent', json)
-
+  handleState(local.path.layer.exportJSON())
   local.path = null;
 }
 
