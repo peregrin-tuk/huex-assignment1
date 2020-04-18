@@ -5,7 +5,6 @@
       <MainWrapper/>
       <FooterWrapper/>
     </v-content>
-    <Debug/>
   </v-app>
 </template>
 
@@ -14,12 +13,10 @@
   import HeaderWrapper from './components/layout/HeaderWrapper.vue';
   import MainWrapper from './components/layout/MainWrapper.vue';
   import FooterWrapper from './components/layout/FooterWrapper.vue';
-  import Debug from "@/components/Debug.vue";
 
   export default Vue.extend({
     name: 'App',
     components: {
-      Debug,
       HeaderWrapper,
       MainWrapper,
       FooterWrapper
