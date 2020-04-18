@@ -5,7 +5,6 @@
     flat
     dark
   >
-    <UserBadge></UserBadge>
     <BoardTitle color="white" />
     <v-spacer></v-spacer>
 
@@ -40,7 +39,6 @@ import BoardTitle from "./BoardTitle.vue";
 import ToolButton from "../buttons/ToolButton.vue";
 import SliderButton from "../buttons/SliderButton.vue";
 import ColorButton from "../buttons/ColorButton.vue";
-import UserBadge from "../etc/UserBadge.vue";
 
 export default Vue.extend({
   name: "TopBar",
@@ -48,8 +46,7 @@ export default Vue.extend({
     BoardTitle,
     ToolButton,
     SliderButton,
-    ColorButton,
-    UserBadge
+    ColorButton
   }
 })
 </script>
