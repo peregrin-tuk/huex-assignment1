@@ -92,11 +92,11 @@ const store: Store<any> = new Vuex.Store({
     },
 
     loadLocalBoardsFromStorage(state) {
-      localForage.getItem('boards').then(val => {
+      localForage.getItem('boards').then((val: unknown) => {
         if(!val) return
         state.localStoredBoards = val
       })
-        .catch(e => console.error(e))
+        .catch((e: any) => console.error(e))
     },
     ...vuexfireMutations
   },
