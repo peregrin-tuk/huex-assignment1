@@ -1,14 +1,14 @@
 <template>
-  <v-dialog v-model="dialog" width="500">
+  <v-dialog v-model="dialog.show" width="500" v-on:close="closeDialog">
     <template v-slot:activator="{ on }">
-      <LabeledButton 
-        :activator="on" 
+      <LabeledButton
+        :activator="on"
         :label="label" 
         :icon="icon"
       ></LabeledButton>
     </template>
 
-    <slot></slot>
+    <slot />
   </v-dialog>
 </template>
 
@@ -32,8 +32,13 @@ export default Vue.extend({
     }
   },
   data: () => ({
-      dialog: false,
+      dialog: { show: false },
     }),
+  methods: {
+    closeDialog() {
+      this.dialog.show = false
+    }
+  }
 });
 </script>
 

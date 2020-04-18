@@ -6,7 +6,7 @@
       class="labeledButton"
       color="white"
       :text="!hover"
-      :elevation="hover ? 5 : false"
+      :elevation="hover ? 5 : 0"
       v-on="activator"
     >
       <span
@@ -40,7 +40,7 @@ export default Vue.extend({
       required: true
     },
     activator: {
-      type: Boolean,
+      type: Object,
       required: true
     }
   }
