@@ -1,0 +1,16 @@
+Starting ChromeDriver 80.0.3987.16 (320f6526c1632ad4f205ebce69b99a062ed78647-refs/branch-heads/3987@{#185}) on port 9515
+Only local connections are allowed.
+Please protect ports used by ChromeDriver and related test frameworks to prevent access by malicious code.
+[1587333254.049][WARNING]: Timed out connecting to Chrome, retrying...
+[1587333259.068][WARNING]: Timed out connecting to Chrome, retrying...
+[1587333261.666][SEVERE]: Timed out receiving message from renderer: 0.100
+[1587333261.775][SEVERE]: Timed out receiving message from renderer: 0.100
+[1587333261.921][SEVERE]: Timed out receiving message from renderer: 0.100
+[1587333262.026][SEVERE]: Timed out receiving message from renderer: 0.100
+[1587333262.133][SEVERE]: Timed out receiving message from renderer: 0.100
+[1587333262.235][SEVERE]: Timed out receiving message from renderer: 0.100
+[1587333262.894][SEVERE]: Timed out receiving message from renderer: 0.100
+[1587333262.996][SEVERE]: Timed out receiving message from renderer: 0.100
+[1587333263.099][SEVERE]: Timed out receiving message from renderer: 0.100
+[1587333263.202][SEVERE]: Timed out receiving message from renderer: 0.100
+[1587333263.304][SEVERE]: Timed out receiving message from renderer: 0.100

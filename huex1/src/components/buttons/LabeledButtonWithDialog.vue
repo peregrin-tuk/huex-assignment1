@@ -5,6 +5,7 @@
         :activator="on"
         :label="label" 
         :icon="icon"
+        :data-nw="nw"
       ></LabeledButton>
     </template>
 
@@ -29,7 +30,8 @@ export default Vue.extend({
     icon: {
       type: String,
       required: true
-    }
+    },
+    nw: String,
   },
   data: () => ({
       dialog: { show: false },

@@ -3,18 +3,21 @@
       <LabeledButtonWithDialog
         label="NEW" 
         icon="mdi-plus-circle-outline"
+        nw="new-btn"
       >
         <NewDialog />
       </LabeledButtonWithDialog>
       <LabeledButtonWithDialog 
         label="OPEN" 
         icon="mdi-folder-open-outline"
+        nw="open-btn"
       >
         <OpenDialog />
       </LabeledButtonWithDialog>
       <LabeledButtonWithDialog 
         label="SHARE" 
         icon="mdi-share-variant"
+        nw="share-btn"
       >
         <ShareDialog />
       </LabeledButtonWithDialog>
