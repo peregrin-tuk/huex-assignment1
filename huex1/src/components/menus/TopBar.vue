@@ -9,15 +9,9 @@
     <v-spacer></v-spacer>
 
     <!-- todo add form stroke color option -->
-    <v-btn
-      icon
-      color="white"
-      @click="$store.dispatch('undoHistory')"
-    >
-      <v-icon color="white">mdi-undo</v-icon>
-    </v-btn>
-    <ColorButton></ColorButton>
-    <SliderButton></SliderButton>
+    <UndoButton />
+    <ColorButton />
+    <SliderButton />
 
     <v-divider
       vertical
@@ -39,6 +33,7 @@ import BoardTitle from "./BoardTitle.vue";
 import ToolButton from "../buttons/ToolButton.vue";
 import SliderButton from "../buttons/SliderButton.vue";
 import ColorButton from "../buttons/ColorButton.vue";
+import UndoButton from "../buttons/UndoButton.vue";
 
 export default Vue.extend({
   name: "TopBar",
@@ -46,7 +41,8 @@ export default Vue.extend({
     BoardTitle,
     ToolButton,
     SliderButton,
-    ColorButton
+    ColorButton,
+    UndoButton
   }
 })
 </script>
