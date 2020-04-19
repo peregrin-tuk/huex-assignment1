@@ -1,4 +1,4 @@
-# huex1
+# weissbrett
 
 ## Project setup
 ```
@@ -18,6 +18,13 @@ npm run build
 ### Lints and fixes files
 ```
 npm run lint
+```
+
+
+### Tests
+```
+npm run test:unit
+npm run test:e2e
 ```
 
 ### Customize configuration
