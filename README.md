@@ -1,5 +1,5 @@
 # Huxe Assignment 1
-Visit https://weissbrett.netlify.app/#4PpTjAnYHQfYI6F4HNhc !
+*Visit https://weissbrett.netlify.app/#4PpTjAnYHQfYI6F4HNhc!*
 
 Vue Drawing Application | Assignment of HUEX course part 1.
 
@@ -10,11 +10,13 @@ Weissbrett - An online whiteboard and drawing application that allows you to dra
 The app is being developed with Vue and Typescript, using Vuetify for UI Elements and Vuex for State Management.
 
 
+
 ### Team: 
 
 Fabian Mohr (s1910629018)
 
 Eric Thalhammer (s1910629017)
+
 
 
 ### Build & Test Commands
