@@ -1,8 +1,8 @@
 <template>
   <IconButton
     :icon="icon"
-    :selected="selected"
-    @click-event="$store.commit('setActiveTool', tool)"
+    class="undo-button"
+    @click-event="$store.dispatch('undoHistory')"
   />
 </template>
 
@@ -15,18 +15,9 @@ export default Vue.extend({
   components: {
     IconButton
   },
-  props: {
-    tool: String,
-    icon: {
-      type: String,
-      required: true
-    }
-  },
-  computed: {
-    selected(): boolean {
-      return this.$store.state.activeTool === this.tool
-    }
-  }
+  data: () => ({
+    icon: 'mdi-undo'
+  }),
 });
 </script>
 

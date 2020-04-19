@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BoardTitle should match snapshot 1`] = `<v-text-field-stub color="success" errorcount="1" errormessages="" messages="" rules="" successmessages="" value="Awesome name" backgroundcolor="" dense="true" hidedetails="true" label="Edit Title" loaderheight="2" clearicon="$clear" outlined="true" type="text" class="board-title"></v-text-field-stub>`;

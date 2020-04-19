@@ -1,8 +1,7 @@
 <template>
   <v-hover v-slot:default="{ hover }">
     <div class="expandible-button-wrapper">
-      <ToolButton :icon="icon">
-      </ToolButton>
+      <IconButton :icon="icon" />
       <div 
         class="expandible-button-options"
         :class="{ 'expandible-button-options-expanded': hover }">
@@ -14,7 +13,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import ToolButton from "./ToolButton.vue"
+import IconButton from "./IconButton.vue"
 
 export default Vue.extend({
   name: "ExpandibleToolButton",
@@ -25,7 +24,7 @@ export default Vue.extend({
     }
   },
   components: {
-    ToolButton,
+    IconButton,
   }
 });
 </script>
