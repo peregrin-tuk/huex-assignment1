@@ -1,5 +1,5 @@
 # Huxe Assignment 1
-*Visit https://weissbrett.netlify.app/#4PpTjAnYHQfYI6F4HNhc!*
+*Visit https://weissbrett.netlify.app/#4PpTjAnYHQfYI6F4HNhc! Open in 2 tabs to see your changes in real-time. :)*
 
 Vue Drawing Application | Assignment of HUEX course part 1.
 
