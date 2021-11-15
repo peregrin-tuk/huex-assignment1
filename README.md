@@ -1,21 +1,26 @@
-# Huxe Assignment 1
+# Weissbrett
+
+A real-time collaborative online whiteboard application made with Vue.js.
+
+
+### Live Demo
+
 *Visit https://weissbrett.netlify.app/#4PpTjAnYHQfYI6F4HNhc! Open in 2 tabs to see your changes in real-time. :)*
 
-Vue Drawing Application | Assignment of HUEX course part 1.
 
-### Project Description:
+
+### Project Description
 
 Weissbrett - An online whiteboard and drawing application that allows you to draw with mouse or touch input using different tools (e.g. pen, forms, eraser). Multiple people can draw on one board (the drawings get synchronized using Firebase). Boards can be named, stored locally and later recalled. They can also be shared & loaded via URL.
 
-The app is being developed with Vue and Typescript, using Vuetify for UI Elements and Vuex for State Management.
+The app was developed with Vue.js and Typescript, using Vuetify for UI Elements and Vuex for State Management.
 
 
 
-### Team: 
+### Team
 
-Fabian Mohr (s1910629018)
-
-Eric Thalhammer (s1910629017)
+- [Eric](https://github.com/peregrin-tuk)
+- [Fabian](https://github.com/fmgrafikdesign)
 
 
 
